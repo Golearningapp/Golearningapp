@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>গো-লার্নিং অনলাইন প্লাটফর্ম</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #ef233c;
+            --dark: #1b263b;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            
+            --rounded-sm: 4px;
+            --rounded-md: 8px;
+            --rounded-lg: 12px;
+            --rounded-xl: 16px;
+            --rounded-full: 9999px;
+            
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-center .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: var(--rounded-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 50%;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: var(--rounded-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 12px;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: calc(100% - 24px);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: var(--shadow-xl);
+            z-index: 1100;
+            transition: var(--transition);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-nav.active {
+            left: 0;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            flex-grow: 1;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-nav-links a {
+            display: block;
+            padding: 12px 0;
+            font-weight: 500;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .mobile-nav-footer {
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 600px;
+            height: 600px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(247, 37, 133, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero-social {
+            display: flex;
+            gap: 15px;
+            margin-left: 15px;
+        }
+        
+        .hero-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .hero-social a:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            color: var(--accent);
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .hero-img {
+            border-radius: var(--rounded-lg);
+            box-shadow: var(--shadow-xl);
+            /* Removed the transform to prevent movement */
+        }
+        
+        .hero-badge {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--rounded-md);
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: var(--rounded-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* Updated Stats Section */
+        .stats {
+            background: white;
+            border-radius: var(--rounded-lg);
+            padding: 60px 0;
+            margin: 40px auto;
+            max-width: 1200px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0.1) 100%);
+            z-index: 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item {
+            padding: 30px 20px;
+            background: white;
+            border-radius: var(--rounded-lg);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            color: var(--primary);
+        }
+        
+        .stat-number span {
+            font-size: 1.8rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        /* Updated Founder/Teachers Section */
+        .teachers {
+            background-color: var(--light);
+        }
+        
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .teacher-card {
+            background-color: white;
+            border-radius: var(--rounded-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .teacher-img-wrapper {
+            width: 180px;
+            height: 180px;
+            margin: 30px auto 20px;
+            border-radius: var(--rounded-lg);
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .teacher-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .teacher-card:hover .teacher-img {
+            transform: scale(1.05);
+        }
+        
+        .teacher-info {
+            padding: 0 20px 30px;
+        }
+        
+        .teacher-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .teacher-subject {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+            font-size: 0.95rem;
+        }
+        
+        .teacher-bio {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .teacher-social {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .teacher-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .teacher-social a.facebook {
+            background-color: #3b5998;
+        }
+        
+        .teacher-social a.youtube {
+            background-color: #ff0000;
+        }
+        
+        .teacher-social a.instagram {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        }
+        
+        .teacher-social a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: var(--shadow-sm);
+        }
+       /* Updated Testimonials Section */
+        .testimonials {
+            background-color: white;
+            position: relative;
+        }
+        
+        .testimonial-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+        
+        .testimonial-card {
+            flex: 0 0 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .testimonial-content {
+            background-color: white;
+            border-radius: var(--rounded-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            height: 100%;
+        }
+        
+        .testimonial-content::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--light-gray);
+            font-family: serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 8px;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .testimonial-dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .testimonial-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            z-index: 10;
+            color: var(--primary);
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .testimonial-container:hover .testimonial-nav {
+            opacity: 1;
+        }
+        
+        .testimonial-prev {
+            left: 0;
+        }
+        
+        .testimonial-next {
+            right: 0;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            margin-bottom: 30px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .contact-text h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-text p, .contact-text a {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .contact-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .contact-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .contact-social a.facebook {
+            background-color: #3b5998;
+        }
+        
+        .contact-social a.youtube {
+            background-color: #ff0000;
+        }
+        
+        .contact-social a.instagram {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        }
+        
+        .contact-social a.telegram {
+            background-color: #0088cc;
+        }
+        
+        .contact-social a:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .contact-form {
+            background-color: white;
+            border-radius: var(--rounded-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--rounded-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-about p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            
+            .hero-actions {
+                justify-content: center;
+            }
+            
+            .hero-social {
+                margin-left: 0;
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero-image {
+                margin-top: 30px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-social {
+                margin-top: 15px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .testimonial-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-badge {
+                right: 0;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-item {
+                padding: 20px 15px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with New Logo -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                   
+                    <div class="logo-text">Go Learning</div>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">হোম</a></li>
+                    <li><a href="mcqsublist.html">এমসিকিউ প্র্যাকটিস</a></li>
+                    <li><a href"shortsublist.html">শর্ট কোশ্চেন</a></li>
+                    <li><a href="handsublist.html">হ্যান্ড নোটস</a></li>
+                    <li><a href="routine.html">রুটিন মেকার</a></li>
+                    <li><a href="about.html">আমাদের লক্ষ্য!</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo">
+               
+                <div class="logo-text">Go Learning</div>
+            </a>
+            <button class="close-btn" id="closeNav">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">হোম</a></li>
+            <li><a href="mcqsublist.html">এমসিকিউ প্র্যাকটিস</a></li>
+            <li><a href="shortsublist.html">শর্ট কোশ্চেন</a></li>
+            <li><a href="handsublist.html">হ্যান্ড নোটস</a></li>
+            <li><a href="routine.html">রুটিন মেকার</a></li>
+            <li><a href="about.html">আমাদের লক্ষ্য!</a></li>
+        </ul>
+        
+        <div class="mobile-nav-footer">
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Hero Section with Fixed Image -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Learn Anytime, Anywhere with Go Learning</h1>
+                    <p class="hero-subtitle">ইন্টারেক্টিভ এমসিকিউ প্র্যাকটিস,শর্ট কোশ্চেন এবং ক্লাস নোটের মাধ্যমে তোমার একাডেমিক লাইফে বস হয়ে উঠো</p>
+                    <div class="hero-actions">
+                        <a href="routine.html" class="btn btn-primary">
+                            <i class="fas fa-play-circle"></i> Make Your Routine 
+                        </a>
+                        <a href="mcqsublist.html" class="btn btn-outline">
+                            <i class="fas fa-book"></i> McQ Practice 
+                        </a>
+                        <div class="hero-social">
+                            <a href="https://facebook.com/yourpage" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://t.me/yourchannel" target="_blank"><i class="fab fa-telegram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Students Learning Online" class="hero-img">
+                    <div class="hero-badge">100% Free Resources</div>
+                </div>
+            </div>
+        </div>
+    </section> 
+                 
+    <!-- Features Section -->
+    <section class="section features">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Why Choose Go Learning?</h2>
+                <p class="section-subtitle">আমরা তোমাদেরকে দিব বেস্ট একটা সাপোর্ট</p>
+            </div>
+            
+            <div class="feature-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="feature-title">McQ প্র্যাকটিস</h3>
+                    <p class="feature-desc">তোমাদের জন্য রয়েছে ইম্পর্ট্যান্ট এমসিকিউ কুইজ</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="feature-title">ইম্পর্টেন্ট নোটস</h3>
+                    <p class="feature-desc">পরীক্ষার আগের রাতে হ্যান্ড নোটস দেখে মুহূর্তেই শেষ করো চ্যাপ্টার</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="feature-title">প্র্যাকটিস কোশ্চেন</h3>
+                    <p class="feature-desc">তোমাদের জন্য রয়েছে ইম্পর্ট্যান্ট শর্ট কোশ্চেন ও সলভ</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">প্রোগ্রেস ট্র্যাকিং</h3>
+                    <p class="feature-desc">এক্সাম শেষে আমরা প্রোভাইড করব রির্পোট কার্ড</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section">
+        <div class="container">
+            <div class="stats">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">5000<span>+</span></div>
+                        <div class="stat-label">এমসিকিউ প্রশ্ন</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000<span>+</span></div>
+                        <div class="stat-label">শর্ট প্রশ্ন</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500<span>+</span></div>
+                        <div class="stat-label">হ্যান্ড নোটস</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000<span>+</span></div>
+                        <div class="stat-label">সন্তুষ্ট শিক্ষার্থী</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="section teachers">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Founder And CEO</h2>
+                <p class="section-subtitle">সার্বিক সহযোগিতা ও ব্যবস্থাপনায়</p>
+            </div>
+            
+            <div class="teacher-grid">
+                <!-- Founder 1 -->
+                <div class="teacher-card">
+                    <div class="teacher-img-wrapper">
+                        <img src="shantorpic.png" alt="Shariar Rahman Shanto" class="teacher-img">
+                    </div>
+                    <div class="teacher-info">
+                        <h3 class="teacher-name">Shariar Rahman Shanto</h3>
+                        <span class="teacher-subject">CFO । HSC 2027</span>
+                        <p class="teacher-bio">যেকোনো প্রয়োজনে যোগাযোগ করো</p>
+                        <div class="teacher-social">
+                            <a href="https://www.facebook.com/share/1CSHpHq3Uy/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Founder 2 -->
+                <div class="teacher-card">
+                    <div class="teacher-img-wrapper">
+                        <img src="Facebook_creation_6F4413CD-EDBD-48B6-B150-6498887B8014.jpeg" alt="Sakib Al Hasan" class="teacher-img">
+                    </div>
+                    <div class="teacher-info">
+                        <h3 class="teacher-name">Sakib Al Hasan</h3>
+                        <span class="teacher-subject">COO । HSC 2027</span>
+                        <p class="teacher-bio">যেকোনো প্রয়োজনে যোগাযোগ করো</p>
+                        <div class="teacher-social">
+                            <a href="https://www.facebook.com/share/16SvZSro5G/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Founder 3 -->
+                <div class="teacher-card">
+                    <div class="teacher-img-wrapper">
+                        <img src="20250602_185652.png" alt="Rohan Sheikh" class="teacher-img">
+                    </div>
+                    <div class="teacher-info">
+                        <h3 class="teacher-name">Rohan Sheikh</h3>
+                        <span class="teacher-subject">CEO । HSC 2027</span>
+                        <p class="teacher-bio">যেকোনো প্রয়োজনে যোগাযোগ করো</p>
+                        <div class="teacher-social">
+                            <a href="https://www.facebook.com/share/1C7vcZY1xf/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">শিক্ষার্থীদের মতামত</h2>
+                <p class="section-subtitle">আমাদের শিক্ষার্থীরা কি বলছে</p>
+            </div>
+            
+            <div class="testimonial-container">
+                <div class="testimonial-slider">
+                    <div class="testimonial-track" id="testimonialTrack">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Go Learning এর হ্যান্ড নোটস গুলো আমার এক্সাম এর জন্য অনেক হেল্পফুল ছিল। বিশেষ করে লাস্ট মিনিট রিভিশনের জন্য এগুলো অসাধারণ!</p>
+                                <div class="testimonial-author">
+                                    <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=Female1" alt="Student" class="author-img">
+                                    <div class="author-info">
+                                        <h4>আয়েশা রহমান</h4>
+                                        <p> এসএসসি স্টুডেন্ট,ঢাকা</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">এমসিকিউ প্র্যাকটিস সেট গুলো আমার এক্সামে অনেক হেল্প করেছে। প্রতিদিন কিছু প্রশ্ন প্র্যাকটিস করার মাধ্যমে আমার কনফিডেন্স লেভেল অনেক বেড়ে গেছে</p>
+                                <div class="testimonial-author">
+                                    <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=Male1" alt="Student" class="author-img">
+                                    <div class="author-info">
+                                        <h4>রিফাত আহমেদ</h4>
+                                        <p>এসএসসি স্টুডেন্ট,রাজশাহী</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3
+                         -->
+                         
+     
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Go Learning এর হ্যান্ড নোটস গুলো আমার এক্সাম এর জন্য অনেক হেল্পফুল ছিল। বিশেষ করে লাস্ট মিনিট রিভিশনের জন্য এগুলো অসাধারণ!</p>
+                                <div class="testimonial-author">
+                                    <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=Female1" alt="Student" class="author-img">
+                                    <div class="author-info">
+                                        <h4>আয়েশা রহমান</h4>
+                                        <p> এসএসসি স্টুডেন্ট,ঢাকা</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <!-- Testimonial 4 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Go learning এর রুটিন মেকার সিস্টেম টা অনেক হেল্পফুল </p>
+                                <div class="testimonial-author">
+                                    <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=Female2" alt="Student" class="author-img">
+                                    <div class="author-info">
+                                        <h4>নুসরাত ফাতিহা</h4>
+                                        <p>এইচএসসি স্টুডেন্ট, খুলনা</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="testimonial-nav testimonial-prev" id="testimonialPrev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="testimonial-nav testimonial-next" id="testimonialNext">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="testimonial-dots" id="testimonialDots">
+                    <!-- Dots will be added dynamically by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">যোগাযোগ করুন</h2>
+                <p class="section-subtitle">তোমাদের যেকোনো সমস্যায় আমাদের ফেসবুক গ্রুপে অথবা ভাইয়াদেরকে ম্যাসেজ করে জানাতে পারো</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>আমাদের ঠিকানা</h3>
+                    <ul class="contact-details">
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>অফিস</h4>
+                                <p>ঢাকা, বাংলাদেশ</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>ফোন</h4>
+                                <a href="tel:+8801321522828">+880 1878627639</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>ইমেইল</h4>
+                                <a href="mailto:Golearning@gmail.com">Golearning@gmail.com</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>সময়</h4>
+                                <p>সকাল ৯টা - রাত ১১টা</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="contact-social">
+                        <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="telegram"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="তোমার নাম" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="তোমার ইমেইল" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="বিষয়">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="তোমার ম্যাসেজ" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> ম্যাসেজ পাঠাও
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+   <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-about">
+                    <h3>Go Learning</h3>
+                    <p>বাংলাদেশের সেরা ফ্রি অনলাইন প্ল্যাটফর্ম যেখানে আপনি পাবেন এমসিকিউ প্র্যাকটিস, শর্ট কোশ্চেন এবং হ্যান্ড নোটস এছাড়াও অনেক ফিচার</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>লিংকস</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">হোম</a></li>
+                        <li><a href="mcqsublist.html">এমসিকিউ প্র্যাকটিস</a></li>
+                        <li><a href="shortsublist.html">শর্ট কোশ্চেন</a></li>
+                        <li><a href="handsublist.html">হ্যান্ড নোটস</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>রিসোর্স</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">ফিজিক্স</a></li>
+                        <li><a href="#">কেমিস্ট্রি</a></li>
+                        <li><a href="#">ম্যাথ</a></li>
+                        <li><a href="#">বায়োলজি</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>সাপোর্ট</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">এফএকিউ</a></li>
+                        <li><a href="#">প্রাইভেসি পলিসি</a></li>
+                        <li><a href="#">টার্মস অ্যান্ড কন্ডিশন</a></li>
+                        <li><a href="#contact">হেল্প সেন্টার</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Go Learning. All Rights Reserved. Created by Rohan</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeNav');
+        const mobileNav = document.getElementById('mobileNav');
+        const navOverlay = document.getElementById('navOverlay');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.add('active');
+            navOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeBtn.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        navOverlay.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Testimonial Slider
+        const track = document.getElementById('testimonialTrack');
+        const prevBtn = document.getElementById('testimonialPrev');
+        const nextBtn = document.getElementById('testimonialNext');
+        const dotsContainer = document.getElementById('testimonialDots');
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-card');
+        const slideCount = slides.length;
+        
+        // Create dots
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('testimonial-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = document.querySelectorAll('.testimonial-dot');
+        
+        // Update slider position
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // Go to specific slide
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+        
+        // Next slide
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }
+        
+        // Previous slide
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            updateSlider();
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Auto slide
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        // Pause on hover
+        const sliderContainer = document.querySelector('.testimonial-slider');
+        sliderContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        sliderContainer.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+        
+        // Touch events for mobile swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
+   
